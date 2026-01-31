@@ -1,0 +1,11 @@
+import React from "react";
+// handles showing graphs
+
+function Plots({ plotUrl, loading }) {
+  if (loading) return <p>Generating graph… please wait.</p>;
+  if (!plotUrl) return null;
+
+  return <img src={plotUrl} alt="Rocket Plot" />;
+}
+
+export default Plot;

@@ -1,0 +1,27 @@
+import React from "react";
+//handles textbox
+//displaying text
+
+function Notes({ thoughts, setThoughts }) {
+  return (
+    <div>
+      <label>Your Thoughts:</label>
+      <br />
+      <textarea
+        value={thoughts}
+        onChange={(e) => setThoughts(e.target.value)}
+        rows="4"
+        cols="50"
+        placeholder="Write your thoughts here..."
+      />
+      {thoughts && (
+        <div>
+          <h3>Your Thoughts</h3>
+          <p>{thoughts}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Notes;
