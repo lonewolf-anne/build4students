@@ -15,6 +15,7 @@ def run_altrocket_sim(mass, thrust):
 
     times = []
     altitudes = []
+    velocities=[]
 
     for i in range(int(max_time / dt)):
         times.append(time)
@@ -30,9 +31,9 @@ def run_altrocket_sim(mass, thrust):
             
         drag= 0.5*den_air*drag_coef*ref_area*velocity**2
         drag_force=np.sign(velocity)*drag
-        net_force=thrust-weight-drag_force
+        net_force=current_thrust-weight-drag_force
             
-        acceleration = (net_force) / mass
+        acceleration = net_force / mass
         velocity += acceleration * dt
         altitude += velocity * dt
         time += dt
@@ -42,5 +43,11 @@ def run_altrocket_sim(mass, thrust):
 
     return {
         "times": times,
-        "altitudes": altitudes
+        "altitudes": altitudes,
+        "velocities":velocity
     }
+    
+#Advantage of this code. I just need to change the internal 
+#stucture and it won't affect backend and frontend
+#the only reason I will touch my backend is if I change the returns or add them or change the def
+

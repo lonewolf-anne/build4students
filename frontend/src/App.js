@@ -2,7 +2,10 @@ import {useState} from "react";
 import Controls from "./components/Controls";
 import Plots from "./components/Plots";
 import Notes from "./components/Notes";
+import DriverDashboard from "./components/DriverDashboard";
+import RocketDashboard from "./components/RocketDashboard";
 import "./App.css";
+
 console.log(Controls, Plots, Notes);
 
 
@@ -12,11 +15,25 @@ function App() {
   const [plotUrl, setPlotUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [thoughts, setThoughts] = useState("");
-  const handleSubmit = async (e) => {
+  const [mode,setMode] = useState("home");  //Mode rocket or driver default rocket
+
+  const handleRocketSubmit = async (e) => {
     e.preventDefault();
 
 
     setLoading(true);
+    {mode==="home" &&(
+      <div className="home">
+        <h1>Welcome to Physics Simulations </h1>
+        <p>Explore the physics of rockets and driver reactions through interactive simulations. Use the tabs above to switch between different simulations and visualize the results. Adjust parameters, run simulations, and gain insights into the fascinating world of physics!</p>
+        <div className="home-buttons">
+          <button onClick={()=>setMode("rocket")}>Try Rocket Simulation</button>
+          <button onClick={()=>setMode("driver")}>Try Driver Simulation</button>
+        </div>
+      </div>
+    )
+
+    }
 
     const response = await fetch("http://localhost:5000/api/rocket", {
       method: "POST",
@@ -31,42 +48,37 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Rocket simulation</h2>
+      <h2>Physics Simulations</h2>
+      
+        {/*switch to rocket simulation */}
+      <div className="tabs">
+        <button onClick={()=>setMode("rocket")}>
+          Rocket Simualtion 
+        </button> 
 
-      <div className="dashboard">
-        <div className="panel">
-          
-          <Controls
-            mass={mass}
-            setMass={setMass}
-            thrust={thrust}
-            setThrust={setThrust}
-            onSubmit={handleSubmit}
-          />
-        </div>
-
-        <div className="panel">
-          {loading && <p id="loading">Generating graph...</p>}
-          {plotUrl && (
-            <img
-              src={`${plotUrl}?t=${Date.now()}`}
-              alt="Rocket Plot"
-            />
-          )}
-        </div>
+        {/*switch to driver simulation */}
+        <button onClick={()=>setMode("driver")}>
+          Driver Reaction
+        </button>
       </div>
+        {mode==="rocket" && (
 
-      <div className="panel thoughts">
-        <label>Your Thoughts:</label>
-        <textarea
-          value={thoughts}
-          onChange={(e) => setThoughts(e.target.value)}
-          placeholder="Write your thoughts here..."
-          rows="4"
+          <RocketDashboard
+          mass={mass}
+          setMass={setMass}
+          thrust={thrust}
+          setThrust={setThrust}
+          plotUrl={plotUrl}
+          loading={loading}
+          onSubmit={handleRocketSubmit}
         />
-      </div>
-    </div>
-  );
-}
+        )}
+
+          {mode==="driver" && 
+          <DriverDashboard />}
+          </div>
+        );
+      }
+          
 
 export default App;

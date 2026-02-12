@@ -1,0 +1,40 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# params
+g = 9.81
+y = 1
+m = 40
+v0 = 0.0
+dt = 0.1
+t_max = 10.0
+
+# numeric Euler simulation (your code)
+times = np.arange(0, t_max+dt, dt)
+vel_num = np.zeros_like(times)
+vel_num[0] = v0
+for i in range(1, len(times)):
+    vel_num[i] = vel_num[i-1] + (g - (y/m)*vel_num[i-1]) * dt
+
+# analytic solution
+tau = m / y
+v_inf = m * g / y
+vel_analytic = v_inf * (1 - np.exp(-times / tau)) + v0 * np.exp(-times / tau)
+
+# plot
+plt.figure()
+plt.plot(times, vel_num, label='Euler numeric')
+plt.plot(times, vel_analytic, '--', label='Analytic')
+plt.axhline(v_inf, color='gray', linestyle=':', label=f'terminal = {v_inf:.1f} m/s')
+plt.xlabel('Time (s)')
+plt.ylabel('Velocity (m/s)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# print error at final time
+print("v_num(t_max) =", vel_num[-1])
+print("v_analytic(t_max) =", vel_analytic[-1])
+print("error =", vel_num[-1] - vel_analytic[-1])
+
+#what is eulers numeric

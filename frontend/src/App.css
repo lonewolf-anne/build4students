@@ -1,7 +1,6 @@
-/* Reset browser weird spacing */
-body {
-    background: red;
-}
+
+
+
 * {
   box-sizing: border-box;
   font-family: "Segoe UI", sans-serif;
@@ -30,8 +29,9 @@ h2 {
 /* Main layout */
 .dashboard {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 350px 1fr;
   gap: 20px;
+  align-items: start;
 }
 
 .thoughts {
@@ -52,6 +52,7 @@ input,
   background-color: #334155;
   color: white;
   margin-bottom: 10px;
+  resize: vertical;
 }
 
 /* Panels */
@@ -60,6 +61,14 @@ input,
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+.panel:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.panel img {
+  max-width: 100%;
 }
 
 /* Inputs */
@@ -100,3 +109,9 @@ img {
   font-weight:bold;
   margin-top: 10px;
 }
+
+@media (max-width: 900px) {
+   .dashboard {
+     grid-template-columns: 1fr; 
+    } 
+  }
