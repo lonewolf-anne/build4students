@@ -54,7 +54,7 @@ def driver_reaction_api():
     plt.ylabel("Reaction Distance (m)")
     plt.title(f"Reaction Distance vs Velocity ({medium.capitalize()})")
     plt.grid(True)
-    plot_path = os.path.join("static", "driver_reaction_plot.png")
+    plot_path =os.path.join("static","driver_reaction_plot.png")
     plt.savefig(plot_path)
     plt.close()
 
@@ -62,4 +62,4 @@ def driver_reaction_api():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
