@@ -10,7 +10,7 @@ function DriverDashboard() {
         e.preventDefault();
         setLoading(true); // prevent refresh after each submit
 
-        const response = await fetch("http://localhost:5000/api/driver", {
+        const response = await fetch(`${API_BASE}/api/driver`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
