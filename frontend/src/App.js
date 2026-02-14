@@ -17,7 +17,6 @@ function App() {
   const [thrust, setThrust] = useState(5000);
   const [plotUrl, setPlotUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [thoughts, setThoughts] = useState("");
   const [mode,setMode] = useState("home");  //Mode rocket or driver default rocket
 
   const handleRocketSubmit = async (e) => {
