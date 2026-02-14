@@ -32,7 +32,7 @@ def rocket_api():
     plt.savefig(plot_path)
     plt.close()
 
-    return jsonify({"plot_url": "https://build4students-backend.onrender.com/static/rocket_plot.png"})
+    return jsonify({"plot_url":"https://build4students-backend.onrender.com/static/rocket_plot.png"})
 
 
 @app.route('/api/driver', methods=["POST"])
@@ -58,7 +58,7 @@ def driver_reaction_api():
     plt.savefig(plot_path)
     plt.close()
 
-    return jsonify({"plot_url": "https://build4students-backend.onrender.com/static/driver_reaction_plot.png"})
+    return jsonify({"plot_url":"https://build4students-backend.onrender.com/static/driver_reaction_plot.png"})
 
 
 if __name__ == "__main__":
