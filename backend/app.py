@@ -8,7 +8,7 @@ import os
 
 matplotlib.use("Agg")  # allows plotting without display
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="static")
 CORS(app)  # handles all CORS automatically
 if not os.path.exists("static"):
     os.makedirs("static")
@@ -32,7 +32,7 @@ def rocket_api():
     plt.savefig(plot_path)
     plt.close()
 
-    return jsonify({"plot_url": "http://localhost:5000/static/rocket_plot.png"})
+    return jsonify({"plot_url": "/static/rocket_plot.png"})
 
 
 @app.route('/api/driver', methods=["POST"])
@@ -58,7 +58,7 @@ def driver_reaction_api():
     plt.savefig(plot_path)
     plt.close()
 
-    return jsonify({"plot_url": "http://localhost:5000/static/driver_reaction_plot.png"})
+    return jsonify({"plot_url": "/static/driver_reaction_plot.png"})
 
 
 if __name__ == "__main__":
