@@ -12,7 +12,7 @@ matplotlib.use("Agg")
 
 # Initialize Flask app and allow CORS
 app = Flask(__name__, static_folder="static")
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Ensure static folder exists
 if not os.path.exists("static"):
