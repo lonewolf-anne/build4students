@@ -7,7 +7,7 @@ import Notes from "./components/Notes";
 import DriverDashboard from "./components/DriverDashboard";
 import RocketDashboard from "./components/RocketDashboard";
 import "./App.css";
-const API_BASE = "https://build4students.onrender.com";
+const API_BASE = "https://build4students-backend.onrender.com";
 
 console.log(Controls, Plots, Notes);
 

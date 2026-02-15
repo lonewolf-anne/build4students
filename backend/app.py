@@ -26,6 +26,8 @@ def serve_static(filename):
 # Rocket simulation endpoint
 @app.route('/api/rocket', methods=["POST","OPTIONS"])
 def rocket_api():
+    if request .method == "OPTIONS":
+        return jsonify({"message": "CORS preflight successful"}), 200
     data = request.get_json()
     mass = float(data.get("mass", 100))
     thrust = float(data.get("thrust", 5000))
@@ -40,7 +42,7 @@ def rocket_api():
     timestamp=int(time.time())
     filename=f"rocket_plot_{timestamp}.png"
     plot_path = os.path.join(app.static_folder, filename)
-    plt.savefig(plot_path)
+    
     # Plot and save
     plt.figure()
     plt.plot(times, altitudes)
@@ -58,6 +60,8 @@ def rocket_api():
 # Driver simulation endpoint
 @app.route('/api/driver', methods=[ "POST","OPTIONS"])
 def driver_reaction_api():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight successful"}), 200   
     data = request.get_json()
     medium = data.get("medium", "eye").lower()
     max_velocity = float(data.get("max_velocity", 30))
