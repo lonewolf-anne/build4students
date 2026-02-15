@@ -36,8 +36,11 @@ def rocket_api():
 
     # Generate unique filename
     filename = f"rocket_plot_{int(time.time())}.png"
+    #plot_path = os.path.join(app.static_folder, filename)
+    timestamp=int(time.time())
+    filename=f"rocket_plot_{timestamp}.png"
     plot_path = os.path.join(app.static_folder, filename)
-
+    plt.savefig(plot_path)
     # Plot and save
     plt.figure()
     plt.plot(times, altitudes)
@@ -49,7 +52,7 @@ def rocket_api():
     plt.close()
 
     # Return full Render URL
-    backend_url = "https://build4students-backend.onrender.com"  # <-- Replace with your actual Render backend URL
+    backend_url ="https://build4students-backend.onrender.com"  # <-- Replace with your actual Render backend URL
     return jsonify({"plot_url": f"{backend_url}/static/{filename}"})
 
 # Driver simulation endpoint
@@ -81,7 +84,7 @@ def driver_reaction_api():
     plt.close()
 
     # Return full Render URL
-    backend_url = "https://build4students-backend.onrender.com"  # <-- Replace with your actual Render backend URL
+    backend_url ="https://build4students-backend.onrender.com"  # <-- Replace with your actual Render backend URL
     return jsonify({"plot_url": f"{backend_url}/static/{filename}"})
 
 # Run the app
