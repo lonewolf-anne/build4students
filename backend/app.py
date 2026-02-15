@@ -24,7 +24,7 @@ def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
 # Rocket simulation endpoint
-@app.route('/api/rocket', methods=["POST"])
+@app.route('/api/rocket', methods=["GET", "POST"])
 def rocket_api():
     data = request.get_json()
     mass = float(data.get("mass", 100))
@@ -56,7 +56,7 @@ def rocket_api():
     return jsonify({"plot_url": f"{backend_url}/static/{filename}"})
 
 # Driver simulation endpoint
-@app.route('/api/driver', methods=["POST"])
+@app.route('/api/driver', methods=["GET", "POST"])
 def driver_reaction_api():
     data = request.get_json()
     medium = data.get("medium", "eye").lower()
